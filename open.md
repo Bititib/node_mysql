@@ -8,5 +8,5 @@ src-
     | -> middleware : 文件中间件目录
     | -> router : 路由文件目录
     | -> service : 数据收集服务目录
-    | -> utils : 错误处理目录
+    | -> utils : 集成处理目录
     | -> main.js : 服务启动文件
