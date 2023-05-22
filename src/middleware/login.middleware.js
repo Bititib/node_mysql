@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken")
 const verifyLogin = async (ctx,next)=>{
     // 获取登录的数据
     const { usename,password } = ctx.request.body
-    console.log(usename)
     // 判断用户名和密码是否为空
     if(!usename || !password){
         return ctx.app.emit('error',NAME_OR_PASSWORD_IS_NOT_NULL,ctx)
@@ -36,6 +35,9 @@ const verifyLogin = async (ctx,next)=>{
 const verifyUserAuth = async (ctx,next)=>{
     // 判断用户返回的数据
     const authorization = ctx.headers.authorization
+    if(!authorization){
+        return ctx.app.emit('error',UNAUTHORIZED,ctx)
+    }
     const token = authorization.replace('Bearer ','')
     try {
         const result = jwt.verify(token,publicKey,{algorithms:['RS256']})

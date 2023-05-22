@@ -17,10 +17,14 @@ class LoginController{
     }
 
     test(ctx,next){
+        const { id,usename} = ctx.user
          // 返回信息
          ctx.body = {
             code:1001,
-            data:'ss',
+            data:{
+                id,
+                usename,
+            },
             message:'可以使用接口'
         }
        
