@@ -1,3 +1,4 @@
+const { PERMISSION_NOT_AUTH } = require("../config/error_constants")
 const { queryId } = require("../service/moment.service")
 const momentService = require("../service/moment.service")
 
@@ -40,12 +41,23 @@ class MomentContorller {
         }
     }
 
+    async deleter(ctx,next){
+        const {moment_id} = ctx.params
+
+        const result = await momentService.deleteID(moment_id)
+        if(!result) return ctx.app.emit('error',PERMISSION_NOT_AUTH,ctx)
+        ctx.body = {
+            code:2,
+            message:"删除成功",
+            data:result
+        }
+    }
+
     async updata(ctx,next){
         // 要修改的id 和 内容
-        const { id } = ctx.params
+        const { moment_id } = ctx.params
         const { content } = ctx.request.body
-        const result = await momentService.updataId(content,id)
-        console.log(result)
+        const result = await momentService.updataId(content,moment_id)
         ctx.body = {
             code:2,
             data:result,

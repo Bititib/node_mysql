@@ -1,5 +1,8 @@
 const app = require('../app');
-const { NAME_OR_PASSWORD_IS_NOT_NULL, NAME_IS_EXIST, NAME_IS_NOT_EXIST, PASSWORD_IS_INACCRACY, UNAUTHORIZED } = require('../config/error_constants');
+const { NAME_OR_PASSWORD_IS_NOT_NULL, 
+    NAME_IS_EXIST, NAME_IS_NOT_EXIST, 
+    PASSWORD_IS_INACCRACY, UNAUTHORIZED, 
+    PERMISSION_NOT_AUTH } = require('../config/error_constants');
 
 app.on('error',(error,ctx)=>{
     let code = 0
@@ -25,6 +28,10 @@ app.on('error',(error,ctx)=>{
         case UNAUTHORIZED:
             code = -1004
             message = '身份令牌token无效'
+            break
+        case PERMISSION_NOT_AUTH:
+            code = -2001
+            message = "该用户没有对应操作权限"
     }
 
     ctx.body = { code ,message}

@@ -34,6 +34,12 @@ class momentService {
         return result
     }
 
+    async deleteID(moment_id){
+        const statement = 'DELETE FROM moment WHERE id = ?;';
+        const [result] = await connection.execute(statement,[moment_id]);
+        return result
+    }
+    
     async updataId(content,id){
 
         const statement = `UPDATE moment SET content = ? WHERE id = ?;`;
@@ -42,6 +48,8 @@ class momentService {
 
         return result
     }
+    
+    
 } 
 
 module.exports = new momentService()

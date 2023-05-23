@@ -35,14 +35,19 @@ const verifyLogin = async (ctx,next)=>{
 const verifyUserAuth = async (ctx,next)=>{
     // 判断用户返回的数据
     const authorization = ctx.headers.authorization
+
     if(!authorization){
         return ctx.app.emit('error',UNAUTHORIZED,ctx)
     }
+
     const token = authorization.replace('Bearer ','')
+
     try {
         const result = jwt.verify(token,publicKey,{algorithms:['RS256']})
         ctx.user = result
+        
        await next()
+
     } catch (error) {
         ctx.app.emit('error',UNAUTHORIZED,ctx)
     }

@@ -37,4 +37,25 @@ module.exports = registerRouters
 > 已完成动态内容存储在数据库中
 
 
-### 
+### 权限认证
+> permission.middleware.js
+```js
+    const verifyMomentPermission = async (ctx,next) =>{
+        // 1、需要获取登录用户的id和修改动态的id
+        const { momentid } = ctx.params
+        const { id } = ctx.user
+
+        // 2、查询user的id是否有权限修改moment的id
+        const ispermissionAuth = await permissionSerivce.checkMonment(momentid,id)
+        if(!ispermissionAuth){
+            return error
+        }
+        
+        await next()
+ }
+```
+
+### 完成动态的增删改查
+
+
+### 创建动态留言功能接口

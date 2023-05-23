@@ -3,7 +3,7 @@ const NAME_IS_EXIST = 'name_is_exist';
 const NAME_IS_NOT_EXIST = 'name_is_not_exist';
 const PASSWORD_IS_INACCRACY ='password_is_inaccuracy';
 const UNAUTHORIZED = 'unauthorized_usename'
-
+const PERMISSION_NOT_AUTH = 'permission_not_auth'
 
 
 
@@ -12,5 +12,6 @@ module.exports = {
     NAME_IS_EXIST,
     NAME_IS_NOT_EXIST,
     PASSWORD_IS_INACCRACY,
-    UNAUTHORIZED
+    UNAUTHORIZED,
+    PERMISSION_NOT_AUTH
 }
