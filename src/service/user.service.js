@@ -18,6 +18,12 @@ class Service{
         const [ values ] = await connection.execute(statement,[name]);
         return values 
     }
+
+    async updateUserAvatar(avatarUrl,user_id){
+        const statement =  `UPDATE user SET avatar_url = ? WHERE id = ?;`
+        const [result] = await connection.execute(statement,[avatarUrl,user_id]);
+        return result
+    }
 }
 
 
